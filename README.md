@@ -1,6 +1,6 @@
 # linux-tt
 
-Linux kernel build with TT CPU scheduler patch by Hamad Al Marri
+Linux kernel build for Archlinux with TT CPU scheduler patch by Hamad Al Marri
 
 # Version
 
