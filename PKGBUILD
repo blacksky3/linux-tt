@@ -410,7 +410,7 @@ _package-headers(){
   pkgdesc="Headers and scripts for building modules for the $pkgbase package"
   depends=("${pkgbase}" pahole)
 
-  cd ${srcdir}/linux-$major
+  cd ${srcdir}/linux-$pkgver
 
   local builddir="$pkgdir"/usr/lib/modules/"$(<version)"/build
 
