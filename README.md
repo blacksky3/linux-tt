@@ -4,7 +4,7 @@ Linux kernel build for Archlinux with TT CPU scheduler patch by Hamad Al Marri
 
 # Version
 
-- 5.16.14
+- 5.16.15
 
 # Build
 
