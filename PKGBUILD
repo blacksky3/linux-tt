@@ -1,4 +1,3 @@
-
 # _     _            _        _          _____
 #| |__ | | __ _  ___| | _____| | ___   _|___ /
 #| '_ \| |/ _` |/ __| |/ / __| |/ / | | | |_ \
@@ -59,7 +58,7 @@ for _p in "${pkgname[@]}"; do
     _package${_p#$pkgbase}
   }"
 done
-pkgver=5.16.15
+pkgver=5.16.16
 pkgrel=1
 major=5.16
 arch=(x86_64)
@@ -71,7 +70,7 @@ if [[ "$_compiler" = "2" ]]; then
 fi
 options=(!strip)
 
-archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/2bb108aed7aee453d94e2684b50125a4b50c0285/trunk
+archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/3b39577d2ed83108724c83c5e91dfced35e68459/trunk
 lucjanpath=https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/$major
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
@@ -487,7 +486,8 @@ _package-headers(){
   mkdir -p "$pkgdir/usr/src"
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
-sha256sums=(8f30c408e0b360def95777edd340b99916f66b27e1fa5121c3368639af0d24d6
+
+sha256sums=(cca7d6e053e33f44af1b39f7becec73a387911d81ede5a84ecf671692533138f
             937b8c12653d7b18be9b5673e9fa7fba9512c2b5c947e5d489a5e0749a0a8253
             0fab128cab25c49d28b664de9df3782001818da8073fa9f369bc1d56da536635
             783fb4cc126be92877cc81dda44beb2f904c31e54c4eee5f013c3d26cba2117a
