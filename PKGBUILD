@@ -89,9 +89,7 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${lucjanpath}/block-patches-sep/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
         ${lucjanpath}/block-patches-sep/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
         ${lucjanpath}/ll-patches/0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch
-        ${lucjanpath}/ll-patches/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch
-        # BLK patches
-        ${lucjanpath}/blk-patches-v4/0001-blk-patches.patch)
+        ${lucjanpath}/ll-patches/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -343,11 +341,6 @@ prepare(){
 
   sleep 2s
 
-  msg2 "Enable BLK_CGROUP_IOSTAT (IO statistics monitor per cgroup)"
-  scripts/config --module CONFIG_BLK_CGROUP_IOSTAT
-
-  sleep 2s
-
   plain ""
 
   # Setting localversion
@@ -385,7 +378,7 @@ build(){
 }
 
 _package(){
-  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler patch and Piotr Górski Arch, Block and BLK patches'
+  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler patch and Piotr Górski Arch and Block patches'
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
