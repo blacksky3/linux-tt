@@ -6,13 +6,13 @@
 #                                  |___/
 
 #Maintainer: blacksky3 <blacksky3@tuta.io> <https://github.com/blacksky3>
-#Credits: Jan Alexander Steffens (heftig) <heftig@archlinux.org> ---> For the base PKGBUILD
-#Credits: Andreas Radke <andyrtr@archlinux.org> ---> For the base PKGBUILD
-#Credits: Linus Torvalds ---> For the linux kernel
-#Credits: Joan Figueras <ffigue at gmail dot com> ---> For the base PKFBUILD
-#Credits: Hamad Al Marri <https://github.com/hamadmarri/TT-CPU-Scheduler> ---> For TT CPU Scheduler and high-hz patches
-#Credits: Piotr Górski <lucjan.lucjanov@gmail.com> <https://github.com/sirlucjan> ---> For Arch patches
-#Credits: Etienne Juvigny (Tk-Glitch) <tkg@froggi.es> <https://github.com/Tk-Glitch> ---> For config setings
+#Credits: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+#Credits: Andreas Radke <andyrtr@archlinux.org>
+#Credits: Joan Figueras <ffigue at gmail dot com>
+#Credits: Linus Torvalds
+#Credits: Hamad Al Marri <https://github.com/hamadmarri/TT-CPU-Scheduler>
+#Credits: Piotr Górski <lucjan.lucjanov@gmail.com> <https://github.com/sirlucjan>
+#Credits: Etienne Juvigny (Tk-Glitch) <tkg@froggi.es> <https://github.com/Tk-Glitch>
 
 ################################# Arch ################################
 
@@ -84,7 +84,14 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${lucjanpath}/arch-patches-v5-sep/0003-Bluetooth-Read-codec-capabilities-only-if-supported.patch
         ${lucjanpath}/arch-patches-v5-sep/0004-Bluetooth-fix-deadlock-for-RFCOMM-sk-state-change.patch
         ${lucjanpath}/arch-patches-v5-sep/0006-mt76-mt7921-reduce-log-severity-levels-for-informati.patch
-        ${lucjanpath}/arch-patches-v5-sep/0007-Revert-NFSv4.1-query-for-fs_location-attr-on-a-new-f.patch)
+        ${lucjanpath}/arch-patches-v5-sep/0007-Revert-NFSv4.1-query-for-fs_location-attr-on-a-new-f.patch
+        # Block patches. Set BFQ as default
+        ${lucjanpath}/block-patches-sep/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
+        ${lucjanpath}/block-patches-sep/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
+        ${lucjanpath}/ll-patches/0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch
+        ${lucjanpath}/ll-patches/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch
+        # BLK patches
+        ${lucjanpath}/blk-patches-v4/0001-blk-patches.patch)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -336,6 +343,11 @@ prepare(){
 
   sleep 2s
 
+  msg2 "Enable BLK_CGROUP_IOSTAT (IO statistics monitor per cgroup)"
+  scripts/config --module CONFIG_BLK_CGROUP_IOSTAT
+
+  sleep 2s
+
   plain ""
 
   # Setting localversion
@@ -373,7 +385,7 @@ build(){
 }
 
 _package(){
-  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler patch and Piotr Górski Arch patches'
+  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler patch and Piotr Górski Arch, Block and BLK patches'
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
@@ -496,4 +508,9 @@ sha256sums=(cca7d6e053e33f44af1b39f7becec73a387911d81ede5a84ecf671692533138f
             362cbeb8ee42c34ae635815817a4a6585e422a5ab01d36fe6aa5108a28712ed2
             12947c1f27d1c6b7ec46228f4b71a8eb7b47488e7041015817a9a68ecd451109
             2c83042bb9e5c2f5851567617d0376a53b14494ed4e085af2a7fa1b0194cd071
-            cb29309136affdc47bd13dfd88e611be15c2b301c9a1320cb597807bafce321a)
+            cb29309136affdc47bd13dfd88e611be15c2b301c9a1320cb597807bafce321a
+            5223b5cbabf75d0a9e1da40a36cde06fd094763762322f8f5c9014b9e63527cd
+            d20bf76974609f24ac092330e0fe0005ac77c401937511e71e6f1d5240042caa
+            a6f810ec83bb5f2d68a25ff03c6940dfe5e7b2e9bfa59b9629bb703b0e11eb41
+            717749721483b8b19e527c3659efe2015a8147e4e6fc2515f96775574a0a40d3
+            f74c3222bd024ce7f9b4e881cd910e6ec71ceb8b612caef337f3cd0df9876b03)
