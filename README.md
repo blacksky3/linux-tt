@@ -1,6 +1,6 @@
 # linux-tt
 
-Linux kernel build for Archlinux with Hamad Al Marri TT CPU scheduler patch, Piotr Górski Arch, Block and CPU patches and Graysky2 kernel_compiler_patch patch.
+Linux kernel build for Archlinux with Hamad Al Marri TT CPU scheduler patch, Piotr Górski AMD64, Arch, Block and CPU patches, XanMod AMD P-State and CPU Power patches and Graysky2 kernel_compiler_patch patch.
 
 # Version
 
@@ -11,7 +11,7 @@ Linux kernel build for Archlinux with Hamad Al Marri TT CPU scheduler patch, Pio
     git clone https://github.com/blacksky3/linux-tt.git
     cd linux-linux-tt
     env_compiler=(1 or 2) makepkg -s
-    
+
 # Build variables
 
 ### _compiler
@@ -32,7 +32,7 @@ You can add this repo to your pacman.conf
     [kernel]
     SigLevel = Optional TrustAll
     Server = https://www.blacksky3.com/$arch/$repo
-    
+
 # CPU Scheduler
 
 ## TT CPU Scheduler

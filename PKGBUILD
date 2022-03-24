@@ -11,6 +11,7 @@
 #Credits: Joan Figueras <ffigue at gmail dot com>
 #Credits: Linus Torvalds
 #Credits: Hamad Al Marri <https://github.com/hamadmarri/TT-CPU-Scheduler>
+#Credits: Alexandre Frade <kernel@xanmod.org> <https://github.com/xanmod> <https://xanmod.org/>
 #Credits: Piotr Górski <lucjan.lucjanov@gmail.com> <https://github.com/sirlucjan>
 #Credits: Graysky2 <graysky@archlinux.us> <https://github.com/graysky2>
 #Credits: Etienne Juvigny (Tk-Glitch) <tkg@froggi.es> <https://github.com/Tk-Glitch>
@@ -73,12 +74,15 @@ options=(!strip)
 
 archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/3b39577d2ed83108724c83c5e91dfced35e68459/trunk
 lucjanpath=https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/$major
+xanmodpath=https://raw.githubusercontent.com/xanmod/linux-patches/master/linux-$major.y-xanmod
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
         ${archlinuxpath}/config
         tt-${major}.patch
         high-hz.patch
         # Piotr Górski patches
+        # AMD64 patches
+        ${lucjanpath}/amd64-patches/0001-amd64-patches.patch
         # Arch patches
         ${lucjanpath}/arch-patches-v5-sep/0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
         ${lucjanpath}/arch-patches-v5-sep/0002-Bluetooth-btintel-Fix-bdaddress-comparison-with-garb.patch
@@ -94,6 +98,35 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         # CPU patches
         ${lucjanpath}/cpu-patches-sep/0002-init-Kconfig-enable-O3-for-all-arches.patch
         ${lucjanpath}/cpu-patches-sep/0004-Makefile-Turn-off-loop-vectorization-for-GCC-O3-opti.patch
+        # XanMod patches
+        # AMD P-State patches
+        ${xanmodpath}/amd-pstate/0001-x86-cpufeatures-Add-AMD-Collaborative-Processor-Perf.patch
+        ${xanmodpath}/amd-pstate/0002-x86-msr-Add-AMD-CPPC-MSR-definitions.patch
+        ${xanmodpath}/amd-pstate/0003-ACPI-CPPC-Implement-support-for-SystemIO-registers.patch
+        #${xanmodpath}/amd-pstate/0004-ACPI-CPPC-Check-present-CPUs-for-determining-_CPC-is.patch
+        ${xanmodpath}/amd-pstate/0005-ACPI-CPPC-Add-CPPC-enable-register-function.patch
+        ${xanmodpath}/amd-pstate/0006-cpufreq-amd-pstate-Introduce-a-new-AMD-P-State-drive.patch
+        ${xanmodpath}/amd-pstate/0007-cpufreq-amd-pstate-Add-fast-switch-function-for-AMD-.patch
+        ${xanmodpath}/amd-pstate/0008-cpufreq-amd-pstate-Introduce-the-support-for-the-pro.patch
+        ${xanmodpath}/amd-pstate/0009-cpufreq-amd-pstate-Add-trace-for-AMD-P-State-module.patch
+        ${xanmodpath}/amd-pstate/0010-cpufreq-amd-pstate-Add-boost-mode-support-for-AMD-P-.patch
+        ${xanmodpath}/amd-pstate/0011-cpufreq-amd-pstate-Add-AMD-P-State-frequencies-attri.patch
+        ${xanmodpath}/amd-pstate/0012-cpufreq-amd-pstate-Add-AMD-P-State-performance-attri.patch
+        ${xanmodpath}/amd-pstate/0013-Documentation-amd-pstate-Add-AMD-P-State-driver-intr.patch
+        ${xanmodpath}/amd-pstate/0014-MAINTAINERS-Add-AMD-P-State-driver-maintainer-entry.patch
+        ${xanmodpath}/amd-pstate/0015-cpufreq-amd-pstate-Fix-the-dependence-issue-of-AMD-P.patch
+        #${xanmodpath}/amd-pstate/0016-x86-sched-Fix-the-undefined-reference-building-error.patch
+        # CPU Power patches
+        ${xanmodpath}/amd-pstate/cpupower/0001-cpupower-Add-AMD-P-State-capability-flag.patch
+        ${xanmodpath}/amd-pstate/cpupower/0002-cpupower-Add-the-function-to-check-AMD-P-State-enabl.patch
+        ${xanmodpath}/amd-pstate/cpupower/0003-cpupower-Initial-AMD-P-State-capability.patch
+        ${xanmodpath}/amd-pstate/cpupower/0004-cpupower-Add-the-function-to-get-the-sysfs-value-fro.patch
+        ${xanmodpath}/amd-pstate/cpupower/0005-cpupower-Introduce-ACPI-CPPC-library.patch
+        ${xanmodpath}/amd-pstate/cpupower/0006-cpupower-Add-AMD-P-State-sysfs-definition-and-access.patch
+        ${xanmodpath}/amd-pstate/cpupower/0007-cpupower-Enable-boost-state-support-for-AMD-P-State-.patch
+        ${xanmodpath}/amd-pstate/cpupower/0008-cpupower-Move-print_speed-function-into-misc-helper.patch
+        ${xanmodpath}/amd-pstate/cpupower/0009-cpupower-Add-function-to-print-AMD-P-State-performan.patch
+        ${xanmodpath}/amd-pstate/cpupower/0010-cpupower-Add-perf-option-to-print-AMD-P-State-inform.patch
         # Graysky2 CPU patch
         https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.15-5.16.patch)
 
@@ -343,6 +376,11 @@ prepare(){
 
   sleep 2s
 
+  msg2 "Enable AMD Processor P-State driver"
+  scripts/config --enable CONFIG_X86_AMD_PSTATE
+
+  sleep 2s
+
   msg2 "Enable TT CPU Scheduler"
   scripts/config --enable CONFIG_TT_SCHED
 
@@ -391,7 +429,7 @@ build(){
 }
 
 _package(){
-  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler patch, Piotr Górski Arch, Block and CPU patches and Graysky2 kernel_compiler_patch patch'
+  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler patch, Piotr Górski AMD64, Arch, Block and CPU patches, XanMod AMD P-State and CPU Power patches and Graysky2 kernel_compiler_patch patch'
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
@@ -509,6 +547,7 @@ sha256sums=(ceee4d905b47f30140c6f9b815930da90bc09ac4a317e7623fe7e86cc637f1fc
             937b8c12653d7b18be9b5673e9fa7fba9512c2b5c947e5d489a5e0749a0a8253
             0fab128cab25c49d28b664de9df3782001818da8073fa9f369bc1d56da536635
             783fb4cc126be92877cc81dda44beb2f904c31e54c4eee5f013c3d26cba2117a
+            1d5082af4e011cc7e693119b9c89eb621a05495bb4d1c238dd6bbeb7587dc8ff
             29c814d94e9a0277cfd656009bb77df5fb13bb2fedb6f371758d9464eaf6ef96
             a2c15226d6720b8a011f54a09954c0f511cd35a519ee13cc0228a8f803d5e04d
             362cbeb8ee42c34ae635815817a4a6585e422a5ab01d36fe6aa5108a28712ed2
@@ -521,4 +560,28 @@ sha256sums=(ceee4d905b47f30140c6f9b815930da90bc09ac4a317e7623fe7e86cc637f1fc
             717749721483b8b19e527c3659efe2015a8147e4e6fc2515f96775574a0a40d3
             47bcc117d311989050d23fb987e6d63df4e09642dd66f950a784759aeb98bea0
             a92ecc160a8e6a6c986b18e9927fa45783f59f81bcbefcb031d8e70accd51db8
+            87e8cb59967bfca54ba7a8f216757d643ab173a51d5d09245fef7f6ce88d3858
+            66368f27be8342e6872229a908f97153aa8a36a83205b0d3ae5a64703b01bd1a
+            d65f44affc9555823be6c8c70ad822118fc75d9b6b3eba38961e4682faf83bcc
+            d3432018aed0ad6de1a436f5ee451653d743d1c34f3cecd6f94887ec50324691
+            8ce7d3c31c1c471bbe93b6c43c6853dd64c84ab297141fd8e4daff27fecdf9fc
+            1c52c0965b904be494c7bdab62da68b16472801d3294ee309292647db67b07aa
+            d25dc3711f92e1b5cd9f2188f40dae330116384d85dbbd02f749fa72e6df5c60
+            39a272c9382ef79b40e877feef4f04d5ca913d799b5f06b0e362ce50ebfffbb3
+            c378f16ec61ef9753d3be0a085792c4c344249dc4209655c6af32380a7e5aef2
+            577ce7c25a87195f1804a0a631db6122d6a8d2e77263593589db0cef4ea9deb4
+            5d9d0e5f695a53d2cf02b7e130227c88aa1ed28907a5d7814b19bebbe1290353
+            dba60ecfba71f80ea1583f7f961858019ae3e982bfb61f0a96f6b11a6090b5fc
+            69a2e89714e40e82912a52c3795b10e434ec715b8e999704eaca4e7145270b69
+            e3c438dc79da5dddb43d0bd4834bb7d0f634e4f0bb443a2b59ebf61ff244c8da
+            a56651c2d56eca77a1f19ef38be550316120658aaba90bdc3b4e8ca8edc9f6f1
+            98b65feb6f16d9d56940840eb40705be46d46ecaee45bd0b437e02e29ec2aba3
+            e67d4925f3a5931ab2fc48266f4ae613c780ad88e181d95382169e9004b7efe5
+            1b050967864bcd9a167f4da6b7beb5ad30cd3974f2a13ac10c3ae393dd3085be
+            1eebd3bf6b61b82e7379f8ce14c5240be85cd1cae7e02515ab0915935695a293
+            f3b650458ca6c60e25e74b71d6df35de3ce4a8765970a24ac560acf361d09517
+            75bdaf017d2a623efae498e9e0ca3124c9f1f046c2fb637238318f3df79f008d
+            e932f2d98b77fd07c4048549380c357e136611514ecea6bbaa3eddf8169f2c71
+            25cfbb39f4bdfb3f9cb34b46b86d27d6f81ffe161a343225beef3b7c0ead485c
+            f0770f3b1b8f8ec49b92b15876ccc7ec17ad4da8aef22bb6cf301c5566abbebd
             2893ca70c1812f98cbf1ea1ed0abac7b70c91b21f07c4f6c1816a769bcc34909)
