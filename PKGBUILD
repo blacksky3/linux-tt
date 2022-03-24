@@ -89,7 +89,10 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${lucjanpath}/block-patches-sep/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
         ${lucjanpath}/block-patches-sep/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
         ${lucjanpath}/ll-patches/0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch
-        ${lucjanpath}/ll-patches/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch)
+        ${lucjanpath}/ll-patches/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch
+        # CPU patches
+        ${lucjanpath}/cpu-patches-sep/0002-init-Kconfig-enable-O3-for-all-arches.patch
+        ${lucjanpath}/cpu-patches-sep/0004-Makefile-Turn-off-loop-vectorization-for-GCC-O3-opti.patch)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -330,6 +333,13 @@ prepare(){
 
   sleep 2s
 
+  msg2 "Enable CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3"
+  scripts/config --disable CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE
+  scripts/config --disable CONFIG_CC_OPTIMIZE_FOR_SIZE
+  scripts/config --enable CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3
+
+  sleep 2s
+
   msg2 "Enable TT CPU Scheduler"
   scripts/config --enable CONFIG_TT_SCHED
 
@@ -378,7 +388,7 @@ build(){
 }
 
 _package(){
-  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler patch and Piotr Górski Arch and Block patches'
+  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler patch and Piotr Górski Arch, Block and CPU patches'
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
@@ -505,4 +515,6 @@ sha256sums=(cca7d6e053e33f44af1b39f7becec73a387911d81ede5a84ecf671692533138f
             5223b5cbabf75d0a9e1da40a36cde06fd094763762322f8f5c9014b9e63527cd
             d20bf76974609f24ac092330e0fe0005ac77c401937511e71e6f1d5240042caa
             a6f810ec83bb5f2d68a25ff03c6940dfe5e7b2e9bfa59b9629bb703b0e11eb41
-            717749721483b8b19e527c3659efe2015a8147e4e6fc2515f96775574a0a40d3)
+            717749721483b8b19e527c3659efe2015a8147e4e6fc2515f96775574a0a40d3
+            47bcc117d311989050d23fb987e6d63df4e09642dd66f950a784759aeb98bea0
+            a92ecc160a8e6a6c986b18e9927fa45783f59f81bcbefcb031d8e70accd51db8)
