@@ -253,6 +253,12 @@ prepare(){
 
   sleep 2s
 
+  msg2 "Set timer frequency to 1000HZ"
+  scripts/config --enable CONFIG_HZ_1000
+  scripts/config --set-val CONFIG_HZ 1000
+
+  sleep 2s
+
   msg2 "Set to full tickless (by TK-Glitch)"
 
   #periodic ticks
