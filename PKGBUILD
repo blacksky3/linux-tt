@@ -8,13 +8,6 @@
 #Maintainer: blacksky3 <blacksky3@tuta.io> <https://github.com/blacksky3>
 #Credits: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 #Credits: Andreas Radke <andyrtr@archlinux.org>
-#Credits: Joan Figueras <ffigue at gmail dot com>
-#Credits: Linus Torvalds
-#Credits: Hamad Al Marri <https://github.com/hamadmarri/TT-CPU-Scheduler>
-#Credits: Alexandre Frade <kernel@xanmod.org> <https://github.com/xanmod> <https://xanmod.org/>
-#Credits: Piotr Górski <lucjan.lucjanov@gmail.com> <https://github.com/sirlucjan>
-#Credits: Graysky2 <graysky@archlinux.us> <https://github.com/graysky2>
-#Credits: Etienne Juvigny (Tk-Glitch) <tkg@froggi.es> <https://github.com/Tk-Glitch>
 
 ################################# Arch ################################
 
