@@ -3473,7 +3473,7 @@ index 2e4ae00e52d1..307933b82994 100644
  	wait_bit_init();
  
 +#ifdef CONFIG_TT_SCHED
-+	printk(KERN_INFO "TT CPU scheduler v5.15 by Hamad Al Marri.");
++	printk(KERN_INFO "TT CPU scheduler v5.17 by Hamad Al Marri.");
 +#endif
 +
  #ifdef CONFIG_FAIR_GROUP_SCHED
