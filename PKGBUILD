@@ -58,7 +58,7 @@ for _p in "${pkgname[@]}"; do
     _package${_p#$pkgbase}
   }"
 done
-pkgver=5.16.16
+pkgver=5.16.17
 pkgrel=1
 major=5.16
 arch=(x86_64)
@@ -92,7 +92,9 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${lucjanpath}/ll-patches/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch
         # CPU patches
         ${lucjanpath}/cpu-patches-sep/0002-init-Kconfig-enable-O3-for-all-arches.patch
-        ${lucjanpath}/cpu-patches-sep/0004-Makefile-Turn-off-loop-vectorization-for-GCC-O3-opti.patch)
+        ${lucjanpath}/cpu-patches-sep/0004-Makefile-Turn-off-loop-vectorization-for-GCC-O3-opti.patch
+        # Graysky2 CPU patch
+        https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.15-5.16.patch)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -388,7 +390,7 @@ build(){
 }
 
 _package(){
-  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler patch and Piotr Górski Arch, Block and CPU patches'
+  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler patch, Piotr Górski Arch, Block and CPU patches and Graysky2 kernel_compiler_patch patch'
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
@@ -502,7 +504,7 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=(cca7d6e053e33f44af1b39f7becec73a387911d81ede5a84ecf671692533138f
+sha256sums=(ceee4d905b47f30140c6f9b815930da90bc09ac4a317e7623fe7e86cc637f1fc
             937b8c12653d7b18be9b5673e9fa7fba9512c2b5c947e5d489a5e0749a0a8253
             0fab128cab25c49d28b664de9df3782001818da8073fa9f369bc1d56da536635
             783fb4cc126be92877cc81dda44beb2f904c31e54c4eee5f013c3d26cba2117a
@@ -517,4 +519,5 @@ sha256sums=(cca7d6e053e33f44af1b39f7becec73a387911d81ede5a84ecf671692533138f
             a6f810ec83bb5f2d68a25ff03c6940dfe5e7b2e9bfa59b9629bb703b0e11eb41
             717749721483b8b19e527c3659efe2015a8147e4e6fc2515f96775574a0a40d3
             47bcc117d311989050d23fb987e6d63df4e09642dd66f950a784759aeb98bea0
-            a92ecc160a8e6a6c986b18e9927fa45783f59f81bcbefcb031d8e70accd51db8)
+            a92ecc160a8e6a6c986b18e9927fa45783f59f81bcbefcb031d8e70accd51db8
+            2893ca70c1812f98cbf1ea1ed0abac7b70c91b21f07c4f6c1816a769bcc34909)
