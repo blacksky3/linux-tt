@@ -1,10 +1,10 @@
 # linux-tt
 
-Linux kernel build for Archlinux with Hamad Al Marri TT CPU scheduler patch, Piotr Górski AMD64, Arch, Block and CPU patches, XanMod AMD P-State and CPU Power patches and Graysky2 kernel_compiler_patch patch.
+Linux kernel build for Archlinux with Hamad Al Marri TT CPU scheduler patch (kept alive artificially by P. Jung), Piotr Górski Arch, Block and CPU patches, XanMod CPU Power patches and Graysky2 kernel_c    ompiler_patch patch.
 
 # Version
 
-- 5.16.17
+- 5.17
 
 # Build
 
