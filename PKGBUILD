@@ -71,7 +71,7 @@ xanmodpath=https://raw.githubusercontent.com/xanmod/linux-patches/master/linux-$
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
         ${archlinuxpath}/config
-        0001-tt.patch
+        0002-tt.patch
         high-hz.patch
         # Piotr Górski patches
         # Arch patches
@@ -102,7 +102,7 @@ prepare(){
     src="${src%%::*}"
     src="${src##*/}"
     [[ $src = *.patch ]] || continue
-    echo "Applying patch $src..."
+    msg2 "Applying patch $src..."
     patch -Np1 < "../$src"
   done
 
