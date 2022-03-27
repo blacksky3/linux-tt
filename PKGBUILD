@@ -71,7 +71,7 @@ xanmodpath=https://raw.githubusercontent.com/xanmod/linux-patches/master/linux-$
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
         ${archlinuxpath}/config
-        0002-tt.patch
+        0001-tt-5.17-v2.patch
         high-hz.patch
         # Piotr Górski patches
         # Arch patches
