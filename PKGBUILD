@@ -68,11 +68,13 @@ options=(!strip)
 archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/7f98cfac6f93f0c57b930d42da2f95e77076fbc4/trunk
 lucjanpath=https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/$major
 xanmodpath=https://raw.githubusercontent.com/xanmod/linux-patches/master/linux-$major.y-xanmod
+blacksky3path=https://raw.githubusercontent.com/blacksky3/patches/main/$major
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
         ${archlinuxpath}/config
-        0001-tt-5.17-v2.patch
-        high-hz.patch
+        # TT patch
+        ${blacksky3path}/tt/0001-tt-5.17-v2.patch
+        ${blacksky3path}/tt/high-hz.patch
         # Piotr Górski patches
         # Arch patches
         ${lucjanpath}/arch-patches/0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
@@ -88,7 +90,11 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         # CPU Power patches
         ${xanmodpath}/cpupower/0001-cpupower-update-for-Linux-5.18-rc1.patch
         # Graysky2 CPU patch
-        https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.17+.patch)
+        https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.17+.patch
+        # Blacksky3 patch
+        # Arch patches
+        ${blacksky3path}/arch/0002-random-treat-bootloader-trust-toggle-the-same-way-as.patch
+        ${blacksky3path}/arch/0003-Revert-swiotlb-rework-fix-info-leak-with-DMA_FROM_DE.patch)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -400,7 +406,7 @@ build(){
 }
 
 _package(){
-  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler patch (kept alive artificially by P. Jung), Piotr Górski Arch, Block and CPU patches, XanMod CPU Power patches and Graysky2 kernel_compiler_patch patch'
+  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler (kept alive artificially by P. Jung), Arch, Block, CPU, CPU Power and kernel_compiler_patch patch'
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
@@ -526,4 +532,6 @@ sha256sums=(7cd5c5d432a25f45060868ce6a8578890e550158a2f779c4a20804b551e84c24
             74546291433f8e79c9c960075edbd7974d715818b1be6c982308adf93e9e9c4f
             7bf85364c3876a648b542ba5a5ada801181183b29366408ef2b2971edab0bd4c
             05715dd3a05812c3a1185ca6831c8bd38cee3352dab343717ed77b49b4b527c0
-            dea86a521603414a8c7bf9cf1f41090d5d6f8035ce31407449e25964befb1e50)
+            dea86a521603414a8c7bf9cf1f41090d5d6f8035ce31407449e25964befb1e50
+            2826b320e5295d663ec3fdce62472419361fbb3a8b773554ca8819f0cc677ebc
+            9fd6517e1ae736a884d8d80ce9651b8264d87a7b79b358826c2c3c06f234b6eb)
