@@ -4,7 +4,7 @@ Linux kernel build for Archlinux with Hamad Al Marri TT CPU scheduler patch (kep
 
 # Version
 
-- 5.17
+- 5.17.1
 
 # Build
 
