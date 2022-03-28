@@ -66,35 +66,30 @@ fi
 options=(!strip)
 
 archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/7f98cfac6f93f0c57b930d42da2f95e77076fbc4/trunk
-lucjanpath=https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/$major
-xanmodpath=https://raw.githubusercontent.com/xanmod/linux-patches/master/linux-$major.y-xanmod
-blacksky3path=https://raw.githubusercontent.com/blacksky3/patches/main/$major
+patchpath=https://raw.githubusercontent.com/blacksky3/patches/main/$major
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
         ${archlinuxpath}/config
         # TT patch
-        ${blacksky3path}/tt/0001-tt-5.17-v2.patch
-        ${blacksky3path}/tt/high-hz.patch
-        # Piotr Górski patches
+        ${patchpath}/tt/0001-tt-5.17-v2.patch
+        ${patchpath}/tt/high-hz.patch
         # Arch patches
-        ${lucjanpath}/arch-patches/0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+        ${patchpath}/arch/0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+        ${patchpath}/arch/0002-random-treat-bootloader-trust-toggle-the-same-way-as.patch
+        ${patchpath}/arch/0003-Revert-swiotlb-rework-fix-info-leak-with-DMA_FROM_DE.patch
         # Block patches. Set BFQ as default
-        ${lucjanpath}/block-patches-sep/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
-        ${lucjanpath}/block-patches-sep/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
-        ${lucjanpath}/ll-patches/0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch
-        ${lucjanpath}/ll-patches/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch
+        ${patchpath}/block/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
+        ${patchpath}/block/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
+        ${patchpath}/block/0003-block-set-rq_affinity-2-for-full-multithreading-I-O.patch
+        ${patchpath}/block/0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch
+        ${patchpath}/block/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch
         # CPU patches
-        ${lucjanpath}/cpu-patches-sep/0002-init-Kconfig-enable-O3-for-all-arches.patch
-        ${lucjanpath}/cpu-patches-sep/0004-Makefile-Turn-off-loop-vectorization-for-GCC-O3-opti.patch
-        # XanMod patches
+        ${patchpath}/cpu/0002-init-Kconfig-enable-O3-for-all-arches.patch
+        ${patchpath}/cpu/0004-Makefile-Turn-off-loop-vectorization-for-GCC-O3-opti.patch
         # CPU Power patches
-        ${xanmodpath}/cpupower/0001-cpupower-update-for-Linux-5.18-rc1.patch
+        ${patchpath}/cpupower/0001-cpupower-update-for-Linux-5.18-rc1.patch
         # Graysky2 CPU patch
-        https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.17+.patch
-        # Blacksky3 patch
-        # Arch patches
-        ${blacksky3path}/arch/0002-random-treat-bootloader-trust-toggle-the-same-way-as.patch
-        ${blacksky3path}/arch/0003-Revert-swiotlb-rework-fix-info-leak-with-DMA_FROM_DE.patch)
+        https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.17+.patch)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -525,13 +520,14 @@ sha256sums=(7cd5c5d432a25f45060868ce6a8578890e550158a2f779c4a20804b551e84c24
             31eaf5ff89c3263627cb00dd02fb572fb3a42a088527a21e3858d4b388125740
             783fb4cc126be92877cc81dda44beb2f904c31e54c4eee5f013c3d26cba2117a
             4bd1bac2959b989af0dae573123b9aff7c609090537e94ee0ae05099cad977b8
+            2826b320e5295d663ec3fdce62472419361fbb3a8b773554ca8819f0cc677ebc
+            9fd6517e1ae736a884d8d80ce9651b8264d87a7b79b358826c2c3c06f234b6eb
             4d385d6a7f7fd9f9aba19d5c24c24814e1af370ff245c8dc98b03482a27cb257
             a043e4c393395e6ad50d35c973fa0952f5deb109aee8a23103e24297c027641e
+            3a02c7382d4d490e16a6132fcba89004f73044c34daf65906c1f823d2ab25aeb
             6978a2010c3a2dd7bec1260e3f1e0f9d6ebc032664cdd917847f352e58ba2870
             b5ff6f189a83472b737965e0412ca401af4bc539b308e0d9bfa403294e6795e0
             74546291433f8e79c9c960075edbd7974d715818b1be6c982308adf93e9e9c4f
             7bf85364c3876a648b542ba5a5ada801181183b29366408ef2b2971edab0bd4c
             05715dd3a05812c3a1185ca6831c8bd38cee3352dab343717ed77b49b4b527c0
-            dea86a521603414a8c7bf9cf1f41090d5d6f8035ce31407449e25964befb1e50
-            2826b320e5295d663ec3fdce62472419361fbb3a8b773554ca8819f0cc677ebc
-            9fd6517e1ae736a884d8d80ce9651b8264d87a7b79b358826c2c3c06f234b6eb)
+            dea86a521603414a8c7bf9cf1f41090d5d6f8035ce31407449e25964befb1e50)
