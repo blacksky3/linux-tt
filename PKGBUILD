@@ -90,6 +90,8 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${patchpath}/cpupower/0001-cpupower-update-for-Linux-5.18-rc1.patch
         # Futex
         ${patchpath}/futex/0001-futex-Add-entry-point-for-FUTEX_WAIT_MULTIPLE-opcode.patch
+        # Wine
+        ${patchpath}/wine/0001-winesync-Introduce-the-winesync-driver-and-character.patch
         # Graysky2 CPU patch
         https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.17+.patch)
 
@@ -355,6 +357,11 @@ prepare(){
 
   sleep 2s
 
+  msg2 "Enable winesync"
+  scripts/config --enable CONFIG_WINESYNC
+
+  sleep 2s
+
   msg2 "Enable TT CPU Scheduler"
   scripts/config --enable CONFIG_TT_SCHED
 
@@ -403,7 +410,7 @@ build(){
 }
 
 _package(){
-  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler (kept alive artificially by P. Jung), Arch, Block, CPU, CPU Power, Futex and kernel_compiler_patch patch'
+  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler (kept alive artificially by P. Jung), Arch, Block, CPU, CPU Power, Futex, Wine and kernel_compiler_patch patch'
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
@@ -533,4 +540,5 @@ sha256sums=('7cd5c5d432a25f45060868ce6a8578890e550158a2f779c4a20804b551e84c24'
             '7bf85364c3876a648b542ba5a5ada801181183b29366408ef2b2971edab0bd4c'
             '05715dd3a05812c3a1185ca6831c8bd38cee3352dab343717ed77b49b4b527c0'
             '5f6906d9f8c1bd9b30486eba07f2c03ca1849cc5c6a990127ebd81c6e105ac45'
+            '7a7fb14b0e2bef1f1b7b0b3cd1870062db504fdf6510ca913231cf901d89e92e'
             'dea86a521603414a8c7bf9cf1f41090d5d6f8035ce31407449e25964befb1e50')
