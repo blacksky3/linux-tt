@@ -65,7 +65,7 @@ if [[ "$_compiler" = "2" ]]; then
 fi
 options=(!strip)
 
-archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/cb8242a510d80d4e58215a639053fa61954e1b9d/trunk
+archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/0bbf02b31459152f9ca46984fb823537211031ca/trunk
 patchpath=https://raw.githubusercontent.com/blacksky3/patches/main/$major
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
@@ -88,6 +88,8 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${patchpath}/cpu/0004-Makefile-Turn-off-loop-vectorization-for-GCC-O3-opti.patch
         # CPU Power patches
         ${patchpath}/cpupower/0001-cpupower-update-for-Linux-5.18-rc1.patch
+        # Futex
+        ${patchpath}/futex/0001-futex-Add-entry-point-for-FUTEX_WAIT_MULTIPLE-opcode.patch
         # Graysky2 CPU patch
         https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.17+.patch)
 
@@ -401,7 +403,7 @@ build(){
 }
 
 _package(){
-  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler (kept alive artificially by P. Jung), Arch, Block, CPU, CPU Power and kernel_compiler_patch patch'
+  pkgdesc='The Linux kernel and modules with Hamad Al Marri TT CPU scheduler (kept alive artificially by P. Jung), Arch, Block, CPU, CPU Power, Futex and kernel_compiler_patch patch'
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
@@ -515,19 +517,20 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=(7cd5c5d432a25f45060868ce6a8578890e550158a2f779c4a20804b551e84c24
-            bd1e57c15d4eb62024d2ee935b54d36e74e73b22c3800b45ecf9233521a9f74b
-            31eaf5ff89c3263627cb00dd02fb572fb3a42a088527a21e3858d4b388125740
-            783fb4cc126be92877cc81dda44beb2f904c31e54c4eee5f013c3d26cba2117a
-            4bd1bac2959b989af0dae573123b9aff7c609090537e94ee0ae05099cad977b8
-            2826b320e5295d663ec3fdce62472419361fbb3a8b773554ca8819f0cc677ebc
-            9fd6517e1ae736a884d8d80ce9651b8264d87a7b79b358826c2c3c06f234b6eb
-            4d385d6a7f7fd9f9aba19d5c24c24814e1af370ff245c8dc98b03482a27cb257
-            a043e4c393395e6ad50d35c973fa0952f5deb109aee8a23103e24297c027641e
-            3a02c7382d4d490e16a6132fcba89004f73044c34daf65906c1f823d2ab25aeb
-            6978a2010c3a2dd7bec1260e3f1e0f9d6ebc032664cdd917847f352e58ba2870
-            b5ff6f189a83472b737965e0412ca401af4bc539b308e0d9bfa403294e6795e0
-            74546291433f8e79c9c960075edbd7974d715818b1be6c982308adf93e9e9c4f
-            7bf85364c3876a648b542ba5a5ada801181183b29366408ef2b2971edab0bd4c
-            05715dd3a05812c3a1185ca6831c8bd38cee3352dab343717ed77b49b4b527c0
-            dea86a521603414a8c7bf9cf1f41090d5d6f8035ce31407449e25964befb1e50)
+sha256sums=('7cd5c5d432a25f45060868ce6a8578890e550158a2f779c4a20804b551e84c24'
+            'c05ff4ca7a69b94ace73d1019c398f3fd93dfa0ebcc9b2396b56aaa191fc72e0'
+            '31eaf5ff89c3263627cb00dd02fb572fb3a42a088527a21e3858d4b388125740'
+            '783fb4cc126be92877cc81dda44beb2f904c31e54c4eee5f013c3d26cba2117a'
+            '4bd1bac2959b989af0dae573123b9aff7c609090537e94ee0ae05099cad977b8'
+            '2826b320e5295d663ec3fdce62472419361fbb3a8b773554ca8819f0cc677ebc'
+            '9fd6517e1ae736a884d8d80ce9651b8264d87a7b79b358826c2c3c06f234b6eb'
+            '4d385d6a7f7fd9f9aba19d5c24c24814e1af370ff245c8dc98b03482a27cb257'
+            'a043e4c393395e6ad50d35c973fa0952f5deb109aee8a23103e24297c027641e'
+            '3a02c7382d4d490e16a6132fcba89004f73044c34daf65906c1f823d2ab25aeb'
+            '6978a2010c3a2dd7bec1260e3f1e0f9d6ebc032664cdd917847f352e58ba2870'
+            'b5ff6f189a83472b737965e0412ca401af4bc539b308e0d9bfa403294e6795e0'
+            '74546291433f8e79c9c960075edbd7974d715818b1be6c982308adf93e9e9c4f'
+            '7bf85364c3876a648b542ba5a5ada801181183b29366408ef2b2971edab0bd4c'
+            '05715dd3a05812c3a1185ca6831c8bd38cee3352dab343717ed77b49b4b527c0'
+            '5f6906d9f8c1bd9b30486eba07f2c03ca1849cc5c6a990127ebd81c6e105ac45'
+            'dea86a521603414a8c7bf9cf1f41090d5d6f8035ce31407449e25964befb1e50')
