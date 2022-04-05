@@ -75,8 +75,12 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${patchpath}/tt/high-hz.patch
         # Arch patches
         ${patchpath}/arch/0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-        ${patchpath}/arch/0002-random-treat-bootloader-trust-toggle-the-same-way-as.patch
-        ${patchpath}/arch/0003-Revert-swiotlb-rework-fix-info-leak-with-DMA_FROM_DE.patch
+        ${patchpath}/arch/0001-random-treat-bootloader-trust-toggle-the-same-way-as.patch
+        ${patchpath}/arch/0002-Revert-swiotlb-rework-fix-info-leak-with-DMA_FROM_DE.patch
+        ${patchpath}/arch/0003-tick-Detect-and-fix-jiffies-update-stall.patch
+        ${patchpath}/arch/0004-tick-rcu-Remove-obsolete-rcu_needs_cpu-parameters.patch
+        ${patchpath}/arch/0005-tick-rcu-Stop-allowing-RCU_SOFTIRQ-in-idle.patch
+        ${patchpath}/arch/0006-lib-irq_poll-Declare-IRQ_POLL-softirq-vector-as-ksof.patch
         # Block patches. Set BFQ as default
         ${patchpath}/block/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
         ${patchpath}/block/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
@@ -529,8 +533,12 @@ sha256sums=('7cd5c5d432a25f45060868ce6a8578890e550158a2f779c4a20804b551e84c24'
             '31eaf5ff89c3263627cb00dd02fb572fb3a42a088527a21e3858d4b388125740'
             '783fb4cc126be92877cc81dda44beb2f904c31e54c4eee5f013c3d26cba2117a'
             '4bd1bac2959b989af0dae573123b9aff7c609090537e94ee0ae05099cad977b8'
-            '2826b320e5295d663ec3fdce62472419361fbb3a8b773554ca8819f0cc677ebc'
-            '9fd6517e1ae736a884d8d80ce9651b8264d87a7b79b358826c2c3c06f234b6eb'
+            '8a41cecbb9828833032e6f7f3e9833e200e474669daeeb367f0c83629c3d39b3'
+            '81f028e13b16fa94d88ca90b18e93005fcf443702f0e29aa5840d334a234ccc7'
+            '310a4ebe648e37b77f2d9a1788d3ce40affa36ebcb8f7c77770fa5f63326ef3b'
+            '7eb152bb39237d9b1468bb786316f204268922046bb23723446ff9cd79bcba40'
+            'c8cd1e2c5a7206cc21894f7e8de124c42e252f55199fa7f7bf20b812daaba213'
+            'cd9d15995d1f437a039b248aa2bd4822d8f00e465fa8018687d31e78349483a7'
             '4d385d6a7f7fd9f9aba19d5c24c24814e1af370ff245c8dc98b03482a27cb257'
             'a043e4c393395e6ad50d35c973fa0952f5deb109aee8a23103e24297c027641e'
             '3a02c7382d4d490e16a6132fcba89004f73044c34daf65906c1f823d2ab25aeb'
