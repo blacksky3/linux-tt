@@ -53,7 +53,7 @@ for _p in "${pkgname[@]}"; do
     _package${_p#$pkgbase}
   }"
 done
-pkgver=5.17.1
+pkgver=5.17.2
 pkgrel=1
 major=5.17
 arch=(x86_64)
@@ -65,7 +65,7 @@ if [[ "$_compiler" = "2" ]]; then
 fi
 options=(!strip)
 
-archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/5a760e76311f5e8a9bb6c8fa69cc17d59e705322/trunk
+archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/ef8feee10c78446f7286864e36a7d91e14ef866b/trunk
 patchpath=https://raw.githubusercontent.com/blacksky3/patches/main/$major
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
@@ -76,11 +76,14 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         # Arch patches
         ${patchpath}/arch/0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
         ${patchpath}/arch/0001-random-treat-bootloader-trust-toggle-the-same-way-as.patch
-        ${patchpath}/arch/0002-Revert-swiotlb-rework-fix-info-leak-with-DMA_FROM_DE.patch
+        #${patchpath}/arch/0002-Revert-swiotlb-rework-fix-info-leak-with-DMA_FROM_DE.patch
         ${patchpath}/arch/0003-tick-Detect-and-fix-jiffies-update-stall.patch
         ${patchpath}/arch/0004-tick-rcu-Remove-obsolete-rcu_needs_cpu-parameters.patch
         ${patchpath}/arch/0005-tick-rcu-Stop-allowing-RCU_SOFTIRQ-in-idle.patch
         ${patchpath}/arch/0006-lib-irq_poll-Declare-IRQ_POLL-softirq-vector-as-ksof.patch
+        ${patchpath}/arch/0007-x86-speculation-Restore-speculation-related-MSRs-dur.patch
+        #${patchpath}/arch/0008-Reinstate-some-of-swiotlb-rework-fix-info-leak-with-.patch
+        ${patchpath}/arch/0009-Revert-ACPI-processor-idle-Only-flush-cache-on-enter.patch
         # Block patches. Set BFQ as default
         ${patchpath}/block/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
         ${patchpath}/block/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
@@ -436,9 +439,9 @@ _package(){
 
   msg2 "Installing modules..."
   if [[ "$_compiler" = "1" ]]; then
-    make ARCH=${ARCH} CC=${CC} CXX=${CXX} HOSTCC=${HOSTCC} HOSTCXX=${HOSTCXX} INSTALL_MOD_PATH="${pkgdir}"/usr INSTALL_MOD_STRIP=1 -j$(nproc) modules_install
+    make ARCH=${ARCH} CC=${CC} CXX=${CXX} HOSTCC=${HOSTCC} HOSTCXX=${HOSTCXX} INSTALL_MOD_PATH="${pkgdir}"/usr INSTALL_MOD_STRIP=1 DEPMOD=/doesnt/exist modules_install -j$(nproc) # Suppress depmod
   elif [[ "$_compiler" = "2" ]]; then
-    make ARCH=${ARCH} CC=${CC} CXX=${CXX} LLVM=1 LLVM_IAS=1 HOSTCC=${HOSTCC} HOSTCXX=${HOSTCXX} INSTALL_MOD_PATH="${pkgdir}"/usr INSTALL_MOD_STRIP=1 -j$(nproc) modules_install
+    make ARCH=${ARCH} CC=${CC} CXX=${CXX} LLVM=1 LLVM_IAS=1 HOSTCC=${HOSTCC} HOSTCXX=${HOSTCXX} INSTALL_MOD_PATH="${pkgdir}"/usr INSTALL_MOD_STRIP=1 DEPMOD=/doesnt/exist modules_install -j$(nproc) # Suppress depmod
   fi
 
   # remove build and source links
@@ -528,17 +531,18 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('7cd5c5d432a25f45060868ce6a8578890e550158a2f779c4a20804b551e84c24'
-            '3bbdd34b664cb331616469d0900951a175392a1244d3cc6a3d1f30c432434460'
+sha256sums=('2da20f8437cfe813ddee7dcb95e2c4e9e4e8f6168060c05787668ac3ff3f0b99'
+            'c0ef360e34fd21c23509224abae894b0d6d37256cccf82575062a05986ee5dba'
             '31eaf5ff89c3263627cb00dd02fb572fb3a42a088527a21e3858d4b388125740'
             '783fb4cc126be92877cc81dda44beb2f904c31e54c4eee5f013c3d26cba2117a'
             '4bd1bac2959b989af0dae573123b9aff7c609090537e94ee0ae05099cad977b8'
-            '8a41cecbb9828833032e6f7f3e9833e200e474669daeeb367f0c83629c3d39b3'
-            '81f028e13b16fa94d88ca90b18e93005fcf443702f0e29aa5840d334a234ccc7'
-            '310a4ebe648e37b77f2d9a1788d3ce40affa36ebcb8f7c77770fa5f63326ef3b'
-            '7eb152bb39237d9b1468bb786316f204268922046bb23723446ff9cd79bcba40'
-            'c8cd1e2c5a7206cc21894f7e8de124c42e252f55199fa7f7bf20b812daaba213'
-            'cd9d15995d1f437a039b248aa2bd4822d8f00e465fa8018687d31e78349483a7'
+            '223455f2f6fbda9adc2a74d056bbc55006e0c78c3111453e2d253e56eaf7689e'
+            '71cccbed658434bf0394fe91fb0738e661aef9f5a94dffda3c9918a315e825e4'
+            '99c0e2f6aac6a3f5f55fb1e4f3d36f2c9bb38163b2da45b3e43437d3fee4f050'
+            'a046b85754ed7582ec5876d06d3b971e418d079c40801f3e156bb353ef7b802c'
+            '40bde648ef07bc638571a3475e555919df8fd2bdfc5360a920e06178bbcdaf9b'
+            '54ba1866387455129acd74a363dbbf488869347fe9748cb523a591adab1967fb'
+            '036603a75bb89c646586fd3c7e6c73c351b9901f1676e8c62ed729e975e50864'
             '4d385d6a7f7fd9f9aba19d5c24c24814e1af370ff245c8dc98b03482a27cb257'
             'a043e4c393395e6ad50d35c973fa0952f5deb109aee8a23103e24297c027641e'
             '3a02c7382d4d490e16a6132fcba89004f73044c34daf65906c1f823d2ab25aeb'
