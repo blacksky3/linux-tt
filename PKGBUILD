@@ -53,7 +53,7 @@ for _p in "${pkgname[@]}"; do
     _package${_p#$pkgbase}
   }"
 done
-pkgver=5.17.3
+pkgver=5.17.4
 pkgrel=1
 major=5.17
 arch=(x86_64)
@@ -86,6 +86,7 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         #${patchpath}/arch/0009-Revert-ACPI-processor-idle-Only-flush-cache-on-enter.patch
         #${patchpath}/arch/0010-gpio-Restrict-usage-of-GPIO-chip-irq-members-before-.patch
         ${patchpath}/arch/0011-gpio-Request-interrupts-after-IRQ-is-initialized.patch
+        ${patchpath}/arch/0012-NFSv4.1-provide-mount-option-to-toggle-trunking-disc.patch
         # Block patches. Set BFQ as default
         ${patchpath}/block/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
         ${patchpath}/block/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
@@ -533,17 +534,18 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('32d0a8e366b87e1cbde951b9f7a01287546670ba60fac35cccfc8a7c005a162c'
+sha256sums=('6e3cd56ee83a9cb5ac3fde1442c40367ab67368946c4c93bbeb1c65664a0d3c5'
             'c0ef360e34fd21c23509224abae894b0d6d37256cccf82575062a05986ee5dba'
             '31eaf5ff89c3263627cb00dd02fb572fb3a42a088527a21e3858d4b388125740'
             '783fb4cc126be92877cc81dda44beb2f904c31e54c4eee5f013c3d26cba2117a'
             '4bd1bac2959b989af0dae573123b9aff7c609090537e94ee0ae05099cad977b8'
-            '6dd5c690e26ca9a7488c444cb5feaffc44462eca9040bca9fe929c65924f7123'
-            'da260c966a5a07f1bcbca0ed63de4b16f75412b1d500857f0e5e61ffe9f8c62c'
-            'e53a474ac6dc512a62b1a5774669e6ff460a2e2035d102b84d3ebeb389602f3e'
-            'cfe8ba859263ce4b4575130be28865666cef0132600e52fbad4af50842b15bf0'
-            'fd836fbbce8128fa568067cf6974a0bf4225ebdf844c8d396081a9bc3cb53180'
-            'ee8bae1854a138c0aa29a829587a25a4f5e24cb92581c51134b3062cf551222f'
+            '556db0cd181ceee90eeede40faa6306082cfcdebdc15fe6e286e78d21d631af3'
+            '9afe31f7c9ae3660d39e71613b7b1a78f1cfa8af97db2b71b360348a365f403a'
+            '87258eac8b7ab6c295add9778a0212977d9e8fd7694c4ab7a786c4b3bb77a9ce'
+            '0e83073031b4c6f50c83d98cfa65954165c63a7582392ff8f1c896ee2f2a54db'
+            '544f0e940a155441fe70aa68b61bdfc9618dec8849a033ea7975e3e6e422d94a'
+            '3880b8a3b382823e46f9351df204f3c739f38b8a3901b7aec359386a30fec6db'
+            'ff81f507636a1136d50fe3484cf02115c175d08683b9701d7f5056a59597253a'
             '4d385d6a7f7fd9f9aba19d5c24c24814e1af370ff245c8dc98b03482a27cb257'
             'a043e4c393395e6ad50d35c973fa0952f5deb109aee8a23103e24297c027641e'
             '3a02c7382d4d490e16a6132fcba89004f73044c34daf65906c1f823d2ab25aeb'
