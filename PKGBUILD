@@ -53,7 +53,7 @@ for _p in "${pkgname[@]}"; do
     _package${_p#$pkgbase}
   }"
 done
-pkgver=5.17.4
+pkgver=5.17.5
 pkgrel=1
 major=5.17
 arch=(x86_64)
@@ -65,13 +65,13 @@ if [[ "$_compiler" = "2" ]]; then
 fi
 options=(!strip)
 
-archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/d759dad77f07e96418e5550bed22ecc2e5563740/trunk
+archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/db7716480268930de34d45778edad50994fc134f/trunk
 patchpath=https://raw.githubusercontent.com/blacksky3/patches/main/$major
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
         ${archlinuxpath}/config
         # TT patch
-        ${patchpath}/tt/0001-tt-5.17-v2.patch
+        ${patchpath}/tt/0001-tt-5.17-v3.patch
         ${patchpath}/tt/high-hz.patch
         # Arch patches
         ${patchpath}/arch/0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
@@ -534,9 +534,9 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('6e3cd56ee83a9cb5ac3fde1442c40367ab67368946c4c93bbeb1c65664a0d3c5'
-            '3f02a0f2fe820f678d15fb0efce04e3716bdc7590d452317bf1b0b63f3b31cd2'
-            '31eaf5ff89c3263627cb00dd02fb572fb3a42a088527a21e3858d4b388125740'
+sha256sums=('9bbcd185b94436f9c8fe977fa0e862f60d34003562327fcebb27c9fa342fe987'
+            '718abbbc528f1ea6db31b05c4fd00467c23bfefa678dfc32cff482725c26b730'
+            'dbdd89c6ee9b102f49ce3e56913f186d73926fcf40e8dc320ad3f208e5f890a5'
             '783fb4cc126be92877cc81dda44beb2f904c31e54c4eee5f013c3d26cba2117a'
             '4bd1bac2959b989af0dae573123b9aff7c609090537e94ee0ae05099cad977b8'
             '556db0cd181ceee90eeede40faa6306082cfcdebdc15fe6e286e78d21d631af3'
