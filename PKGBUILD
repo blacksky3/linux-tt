@@ -53,7 +53,7 @@ for _p in "${pkgname[@]}"; do
     _package${_p#$pkgbase}
   }"
 done
-pkgver=5.17.5
+pkgver=5.17.6
 pkgrel=1
 major=5.17
 arch=(x86_64)
@@ -534,7 +534,7 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('9bbcd185b94436f9c8fe977fa0e862f60d34003562327fcebb27c9fa342fe987'
+sha256sums=('64ccf18380be5b5491322a3fd54904538b544e523e4bf86289dd8df7404cb10c'
             '718abbbc528f1ea6db31b05c4fd00467c23bfefa678dfc32cff482725c26b730'
             'dbdd89c6ee9b102f49ce3e56913f186d73926fcf40e8dc320ad3f208e5f890a5'
             '783fb4cc126be92877cc81dda44beb2f904c31e54c4eee5f013c3d26cba2117a'
