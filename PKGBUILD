@@ -361,7 +361,7 @@ prepare(){
 
   sleep 2s
 
-  msg2 "Enable winesync"
+  msg2 "Enable Winesync"
   scripts/config --enable CONFIG_WINESYNC
 
   sleep 2s
