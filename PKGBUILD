@@ -83,7 +83,7 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${patchpath}/block/0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch
         ${patchpath}/block/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch
         # BTRFS patches
-        ${patchpath}/btrfs/0001-btrfs-patches-v1.patch
+        ${patchpath}/btrfs/0001-btrfs-patches-v3.patch
         # CPU patches
         ${patchpath}/cpu/0002-init-Kconfig-enable-O3-for-all-arches.patch
         ${patchpath}/cpu/0004-Makefile-Turn-off-loop-vectorization-for-GCC-O3-opti.patch
@@ -532,7 +532,7 @@ sha256sums=('51f3f1684a896e797182a0907299cc1f0ff5e5b51dd9a55478ae63a409855cee'
             'e4dd2216fc31d0eab68d674cbbce70343f920c5146613e97fe8c3afed3139157'
             '7a7f9a4d66abe261f35373002e3556b8af7204d155896c2e6d1b55d74a31b5b8'
             '3829e6f9dd55e5c0ae997d409b15c8784e7584a820c7aa0941d50ed6dffeab31'
-            'fdfa87ca455134bfb0f2c26fa701d422c815d7ea9b50986896f82ecc90a4dc77'
+            'ada818c395255b5112c047208816f0234d9930428782d14915c83e2d197fa0ae'
             'cd634fe619625b01584cd01534b23c2d4eca8146c9690205806b0db5d8029906'
             '26fd09d627f83eb78ecd7e65356731d501b89fbc6cd339018aa1ccd708c4756f'
             'd1939e9d71df2d1b3bd2c60c26e2f26246f4d8f2a93e131e4ee8d49ba7dfc74f'
