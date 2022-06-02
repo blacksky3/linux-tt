@@ -9,7 +9,7 @@ Linux kernel build for Archlinux with Hamad Al Marri TT CPU scheduler (kept aliv
 # Build
 
     git clone https://github.com/blacksky3/linux-tt.git
-    cd linux-tt
+    cd linux-tt/5.18
     env_compiler=(1 or 2) makepkg -s
 
 # Build variables
