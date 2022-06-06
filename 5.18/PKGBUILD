@@ -65,7 +65,7 @@ if [[ "$_compiler" = "2" ]]; then
 fi
 options=(!strip)
 
-archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/34de6c127cc0056bcdb01e3351261276ffbccb71/trunk
+archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/77ce45ab19f738f88c0d218507347a2ee47d325d/trunk
 patchpath=https://raw.githubusercontent.com/blacksky3/patches/main/$major
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
