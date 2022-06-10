@@ -73,7 +73,7 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         # TT patch
         ${patchpath}/tt/0001-tt-5.18-v1.patch
         # AMD patches
-        ${patchpath}/amd/0001-amd-patches-v1.patch
+        ${patchpath}/amd/0001-amd-patches-v2.patch
         # Arch patches
         ${patchpath}/arch/0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
         # Block patches. Set BFQ as default
@@ -525,7 +525,7 @@ _package-headers(){
 sha256sums=('c70cb405076c3cfd73e4de729430b0342ea21b92a04d8284a03fac664ef1cfea'
             '9f4fda38f1c59f7a20a76eff48a0cb302cb0e8e55bda53ec0f1807e10dcdad3a'
             'd61c10b8dfd8715be6e649dc2ea6af759b2b6bb375b109c47b45400130235ed7'
-            '9824cd3a41db040bf28d6538aa4805f869333139cbcf43e0422e1b42f5401270'
+            '1bf652a04412a58b0254066a4731be869bfbe2cff15f0648e31e6b3d3e337a36'
             '4bd1bac2959b989af0dae573123b9aff7c609090537e94ee0ae05099cad977b8'
             '9c0e1dea6f645eee9b09cf7d264b17f00f636bdda35c93d354562dda0d674005'
             'ba63855b09eb27c4c33b4302560acec739e642ee8122d3c867b9f11deb06bc56'
