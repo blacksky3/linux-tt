@@ -88,7 +88,7 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${patchpath}/cpu/0002-init-Kconfig-enable-O3-for-all-arches.patch
         ${patchpath}/cpu/0004-Makefile-Turn-off-loop-vectorization-for-GCC-O3-opti.patch
         # Futex
-        ${patchpath}/futex/0001-futex-Add-entry-point-for-FUTEX_WAIT_MULTIPLE-opcode.patch
+        ${patchpath}/futex/sirlucjan/0001-futex-Add-entry-point-for-FUTEX_WAIT_MULTIPLE-opcode-v1.patch
         # Wine
         ${patchpath}/wine/tkg/0007-v5.18-winesync-v3.patch
         # Graysky2 CPU patch
