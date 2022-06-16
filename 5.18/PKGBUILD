@@ -53,7 +53,7 @@ for _p in "${pkgname[@]}"; do
     _package${_p#$pkgbase}
   }"
 done
-pkgver=5.18.3
+pkgver=5.18.4
 pkgrel=1
 major=5.18
 arch=(x86_64)
@@ -65,7 +65,7 @@ if [[ "$_compiler" = "2" ]]; then
 fi
 options=(!strip)
 
-archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/b4cfe6ae8029f4d58b72a8565ea95ddfcd43c0df/trunk
+archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/f72e95192f6b65dcf1f266c77c54104c1bf042bd/trunk
 patchpath=https://raw.githubusercontent.com/blacksky3/patches/main/$major
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
@@ -76,6 +76,7 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${patchpath}/amd/0001-amd-patches-v2.patch
         # Arch patches
         ${patchpath}/arch/0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+        ${patchpath}/arch/0001-HID-apple-Properly-handle-function-keys-on-Keychron-.patch
         # Block patches. Set BFQ as default
         ${patchpath}/block/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
         ${patchpath}/block/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
@@ -83,7 +84,7 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${patchpath}/block/0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch
         ${patchpath}/block/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch
         # BTRFS patches
-        ${patchpath}/btrfs/0001-btrfs-patches-v4.patch
+        ${patchpath}/btrfs/0001-btrfs-patches-v5.patch
         # CPU patches
         ${patchpath}/cpu/0002-init-Kconfig-enable-O3-for-all-arches.patch
         ${patchpath}/cpu/0004-Makefile-Turn-off-loop-vectorization-for-GCC-O3-opti.patch
@@ -522,17 +523,18 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('c70cb405076c3cfd73e4de729430b0342ea21b92a04d8284a03fac664ef1cfea'
-            '9f4fda38f1c59f7a20a76eff48a0cb302cb0e8e55bda53ec0f1807e10dcdad3a'
+sha256sums=('4b7193476f79c56b0d9988f68777dd0f885a1965e6fd55ec015922aa789492dd'
+            '4dfb25ec17a6ba9f78fa9c0c4e4202f016d6aa92adb83f9e16a3835a0d067bfa'
             'd61c10b8dfd8715be6e649dc2ea6af759b2b6bb375b109c47b45400130235ed7'
             '1bf652a04412a58b0254066a4731be869bfbe2cff15f0648e31e6b3d3e337a36'
             '4bd1bac2959b989af0dae573123b9aff7c609090537e94ee0ae05099cad977b8'
+            '2c9378d3c41751fdd9bb51ad47b43659c89f09904e8dc0264689dc6182d41c4b'
             '9c0e1dea6f645eee9b09cf7d264b17f00f636bdda35c93d354562dda0d674005'
             'ba63855b09eb27c4c33b4302560acec739e642ee8122d3c867b9f11deb06bc56'
             'e4dd2216fc31d0eab68d674cbbce70343f920c5146613e97fe8c3afed3139157'
             '7a7f9a4d66abe261f35373002e3556b8af7204d155896c2e6d1b55d74a31b5b8'
             '3829e6f9dd55e5c0ae997d409b15c8784e7584a820c7aa0941d50ed6dffeab31'
-            'f4ed599589fdd44270229492505f5f88e20d79e93b8044f8041a2fc90486bb4e'
+            '65560f8b6a46f3713926e8cf76409b9119fceecd1561553493249f17782fd976'
             'cd634fe619625b01584cd01534b23c2d4eca8146c9690205806b0db5d8029906'
             '26fd09d627f83eb78ecd7e65356731d501b89fbc6cd339018aa1ccd708c4756f'
             'd1939e9d71df2d1b3bd2c60c26e2f26246f4d8f2a93e131e4ee8d49ba7dfc74f'
