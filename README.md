@@ -1,10 +1,10 @@
 # linux-tt
 
-Linux kernel build for Archlinux with Hamad Al Marri TT CPU scheduler (kept alive artificially by Peter Jung <admin@ptr1337.dev>), AMD. Arch, Block, CPU, BTRFS, Futex, Wine and kernel_compiler_patch patch.
+Linux kernel build for Archlinux with Hamad Al Marri TT CPU scheduler (kept alive artificially by Peter Jung <admin@ptr1337.dev>), AMD. Arch, Block, CPU, Clearlinux, BTRFS, Futex, Wine and kernel_compiler_patch patch.
 
 # Version
 
-- 5.18.4
+- 5.18.5
 
 # Build
 
