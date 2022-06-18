@@ -84,7 +84,7 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${patchpath}/block/0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch
         ${patchpath}/block/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch
         # BTRFS patches
-        ${patchpath}/btrfs/0001-btrfs-patches-v7.patch
+        ${patchpath}/btrfs/0001-btrfs-patches-v9.patch
         # Clearlinux patches
         ${patchpath}/clearlinux/sirlucjan/0001-clearlinux-patches-v5.patch
         # CPU patches
@@ -536,7 +536,7 @@ sha256sums=('9c3731d405994f9cd3a1bb72e83140735831b19c7cec18e0d7a8f3046fa034e7'
             'e4dd2216fc31d0eab68d674cbbce70343f920c5146613e97fe8c3afed3139157'
             '7a7f9a4d66abe261f35373002e3556b8af7204d155896c2e6d1b55d74a31b5b8'
             '3829e6f9dd55e5c0ae997d409b15c8784e7584a820c7aa0941d50ed6dffeab31'
-            '3625411ecd641bb9fcec4f88c084996e8714b542ea7d472ebc0b0f657c7cd6a8'
+            '74de9a1f897c7fbd354c9d6beb74973fd70afead5ea2d2721e51ec3c1f688216'
             '3e217f0cb056bd823b0d593e5fb66e6acd891a21e1ba6343b7b976c4f9075521'
             'cd634fe619625b01584cd01534b23c2d4eca8146c9690205806b0db5d8029906'
             '26fd09d627f83eb78ecd7e65356731d501b89fbc6cd339018aa1ccd708c4756f'
