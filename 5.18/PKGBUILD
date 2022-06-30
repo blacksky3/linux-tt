@@ -53,7 +53,7 @@ for _p in "${pkgname[@]}"; do
     _package${_p#$pkgbase}
   }"
 done
-pkgver=5.18.6
+pkgver=5.18.8
 pkgrel=1
 major=5.18
 arch=(x86_64)
@@ -65,13 +65,13 @@ if [[ "$_compiler" = "2" ]]; then
 fi
 options=(!strip)
 
-archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/68ef9da3f5dc9961e5263b6b2e6545772bb6ede8/trunk
+archlinuxpath=https://raw.githubusercontent.com/archlinux/svntogit-packages/b4c2e1ac141cf0a6150aa1d4b87f8979d58d7435/trunk
 patchpath=https://raw.githubusercontent.com/blacksky3/patches/main/$major
 
 source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz
         ${archlinuxpath}/config
         # TT patch
-        ${patchpath}/tt/0001-tt-5.18-v1.patch
+        ${patchpath}/tt/0001-tt-5.18-v3.patch
         # AMD patches
         ${patchpath}/amd/0001-amd-patches-v2.patch
         # Arch patches
@@ -84,7 +84,7 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         ${patchpath}/block/0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch
         ${patchpath}/block/0003-LL-elevator-always-use-bfq-unless-overridden-by-flag.patch
         # BTRFS patches
-        ${patchpath}/btrfs/0001-btrfs-patches-v11.patch
+        ${patchpath}/btrfs/0001-btrfs-patches-v13.patch
         # Clearlinux patches
         ${patchpath}/clearlinux/sirlucjan/0001-clearlinux-patches-v5.patch
         # CPU patches
@@ -525,9 +525,9 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('4e1c2a9e79847850029571a1dd04761e5f657b52c558070a085365641f133478'
+sha256sums=('0823eb05dba001cf9e2560a76dfa4d81c854e1dcfbfb25cc73ba64cd7e900a36'
             '382aa201a6a6939210dd8668ab052724547b4bd489b38e97502bbd0848061b35'
-            'd61c10b8dfd8715be6e649dc2ea6af759b2b6bb375b109c47b45400130235ed7'
+            '1a0762c22183ce94639576bb1e181702713a8059fa3fee8db3c48e5b5f977c18'
             '1bf652a04412a58b0254066a4731be869bfbe2cff15f0648e31e6b3d3e337a36'
             '4bd1bac2959b989af0dae573123b9aff7c609090537e94ee0ae05099cad977b8'
             '2c9378d3c41751fdd9bb51ad47b43659c89f09904e8dc0264689dc6182d41c4b'
@@ -536,7 +536,7 @@ sha256sums=('4e1c2a9e79847850029571a1dd04761e5f657b52c558070a085365641f133478'
             'e4dd2216fc31d0eab68d674cbbce70343f920c5146613e97fe8c3afed3139157'
             '7a7f9a4d66abe261f35373002e3556b8af7204d155896c2e6d1b55d74a31b5b8'
             '3829e6f9dd55e5c0ae997d409b15c8784e7584a820c7aa0941d50ed6dffeab31'
-            'bb3102a564490c44441a5c16db96ab61374b62e1458f52e1244144200437ac84'
+            '5181515db5a591307806b9b96fc71c704178048cc1de9ec72089d58ccc1526d3'
             '3e217f0cb056bd823b0d593e5fb66e6acd891a21e1ba6343b7b976c4f9075521'
             'cd634fe619625b01584cd01534b23c2d4eca8146c9690205806b0db5d8029906'
             '26fd09d627f83eb78ecd7e65356731d501b89fbc6cd339018aa1ccd708c4756f'
