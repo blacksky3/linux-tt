@@ -86,7 +86,7 @@ source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.
         # BTRFS patches
         ${patchpath}/btrfs/0001-btrfs-patches-v14.patch
         # Clearlinux patches
-        ${patchpath}/clearlinux/sirlucjan/0001-clearlinux-5.18-introduce-clearlinux-patchset-v8.patch
+        ${patchpath}/clearlinux/sirlucjan/0001-clearlinux-patches-v5.patch
         # CPU patches
         ${patchpath}/cpu/0002-init-Kconfig-enable-O3-for-all-arches.patch
         ${patchpath}/cpu/0004-Makefile-Turn-off-loop-vectorization-for-GCC-O3-opti.patch
@@ -537,7 +537,7 @@ sha256sums=('f99e3d01dbb8ee6fe765d9cb2b2e073afd2dc581c0d3979751c862745d73dee3'
             '7a7f9a4d66abe261f35373002e3556b8af7204d155896c2e6d1b55d74a31b5b8'
             '3829e6f9dd55e5c0ae997d409b15c8784e7584a820c7aa0941d50ed6dffeab31'
             '18ff5050e3e58501a50a66851ff5bf0f7ba720585e23d23a60f335ecc99a66c5'
-            'bea9dc96aa128b41cc74b13f27587ecee6a07144acca340a5002fc2264e61781'
+            '3e217f0cb056bd823b0d593e5fb66e6acd891a21e1ba6343b7b976c4f9075521'
             'cd634fe619625b01584cd01534b23c2d4eca8146c9690205806b0db5d8029906'
             '26fd09d627f83eb78ecd7e65356731d501b89fbc6cd339018aa1ccd708c4756f'
             'd1939e9d71df2d1b3bd2c60c26e2f26246f4d8f2a93e131e4ee8d49ba7dfc74f'
